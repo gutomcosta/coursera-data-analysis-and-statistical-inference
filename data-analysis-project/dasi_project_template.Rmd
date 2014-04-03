@@ -1,0 +1,149 @@
+<!-- Make sure that the knitr package is installed and loaded. -->
+<!-- For more info on the package options see http://yihui.name/knitr/options -->
+
+<!-- Replace below with the title of your project -->
+### TITLE
+
+<!-- Enter the code required to load your data in the space below. The data will be loaded but the line of code won't show up in your write up (echo=FALSE) in order to save space-->
+```{r echo=FALSE}
+load(url("http://bit.ly/dasi_gss_data"))
+```
+
+<!-- In the remainder of the document, add R code chunks as needed -->
+
+### Introduction:
+
+This is an Data Analysis project for the Data Analysis and Statistical Inference course of Coursera. 
+My main goal with this work, is trying to provide some kinds of evidence that __there is a relationship between the degree of education and the opinion about having sex with other person than spouse.__
+
+I believe that studying the relationship between the degree of education and some behavioral or social aspects can be help to realize an approximation or distancing of some individual values, for example, in case of this study, betrayal. 
+
+This work can be important for sociologists or psychologist, that want to have a better understanding of the human behavior associated with the education degree.
+
+
+### Data:
+The study is based on the General Social Survey dataset, _Smith, Tom W., Michael Hout, and Peter V. Marsden. General Social Survey, 1972-2012 [Cumulative File]_ . This is a sociological survey used to collect data on demographic characteristics and attitudes of residents of the United States.
+
+The dataset can be found online at: http://bit.ly/dasi_gss_data.
+The dataset cookbook can be found here: https://d396qusza40orc.cloudfront.net/statistics%2Fproject%2Fgss1.html#educ
+
+The data was collected via survey from 1972 until 2012. Until 1993, GSS was administered almost annually. The target sample size for the annual surveys was 1500; actual sample sizes ranged between 1372 (1990) and 1613 (1972). There were no GSSs in 1979,1981 and 1992.
+Since 1994, the GSS has been administered to two samples in event-numbered years, each with a target sample size of 1500, than to a single 1500 person sample each year.
+Some questions in the survey, are no applicable to some respondents. For example, the question on martial happiness is only asked of currently married respondents.
+
+For this study, each case represents the respondent of the survey.
+The variables analyzed by this study are:
+
+* DEGREE - a categorical variable that represent the respondent's highest degree of education 
+* XMARSEX -  a categorical variable that represent the opinion of respondents about having sexual relations with someone than the marriage partner.
+
+This is an observational study, because the data was collected by a survey and there is no interference in that data.
+The population of interests is a person resident in United States. 
+Based on in the idea that Generalization is based on in the combination of two things: Random Sample and Random Assignment, the study can be generalized to the population of USA, but it's not Causal.
+There are some interesting source of bias in the study. First, the respondents can not answer a question, it means there is a Non-Response source of bias. Beside that, there is a kind of Convenience Sample, because the survey is mainly focused on Household, this type of responder are more accessible than others, for example, a person that needs go to the work every day.
+
+There is no causality in these variables, because there is no Random Assignment associated with the study.
+
+
+### Exploratory data analysis:
+
+The objective of this study is trying to understand the relationship of two categorical variables: DEGREE and XMARSEX.
+Before start a study more deeper about this relationship, we will take a look on each column data separately.
+
+Let's investigate the data in XMARSEX column:
+
+```{r exploring_xmarsex}
+table(gss$xmarsex, useNA="ifany")
+```
+
+At the first impression, seems that the majority of the population thinks that the "having sexual relation with someone than you marriage partner" is Always Wrong. Just a little part of this population think that is Not Wrong at All.
+The XMARSEX is categorical variable. To explore how representative are the answers for each option, we will build a frequency table for her.
+
+Take a look at the frequency table: 
+
+```{r exploring_xmarsex_frequence_table}
+table(gss$xmarsex, useNA="ifany") / dim(gss)[1]
+```
+
+As we said before, about 45% of the population, believes that is Always Wrong having sexual relation with someone different of his spouse and just 1.5% believes that is not Wrong at all.
+It's important to note that this variable have a significant number of NA's responses, about 40%, that can be justified by the fact that GSS survey was not executed in some years.
+To verifiy that the NAs answers is related with the years that GSS survey was not executed, we can group the responses by years:
+
+```{r exploring_xmarsex_by_year}
+table(gss$xmarsex,gss$year, useNA="ifany")
+```
+There were no GSSs in 1979,1981 and 1992. As we can see in the table, in these years we don't have information about the NAs, because the data were not inserted in this dataset. In this case, the higher number of NAs is not related with the years that GSS was not executed.
+A important information is that some questions may not exist in all years. This is due to the fact that a question may not have been taken in that year. For example in 1972, 1978, 1983 and 1986 the NAs answer is higher, probably this question was not taken in these years. This is an important factor for higher number of NA answers.
+
+Now, lets do the same analysis to DEGREE variable.
+
+First, here a simple table of DEGREE variable data:
+
+```{r exploring_degree}
+table(gss$degree, useNA="ifany")
+```
+
+At the first impression, we can note that the majority of the population degree of education is concentrated between Lt High School and High School Junior.
+Another important thing to note is the number of NAs responses, 1010. This number is much smaller than the XMARSEX, but it's still loud.
+
+
+Take a look at the frequency table for DEGREE variable.
+
+```{r exploring_degree_frequency_table}
+     table(gss$degree, useNA="ifany") / dim(gss)[1]
+```
+Looking the data, we can see that the NA values represents about 1.7% of the total. Is much smaller than the 40% of the NAs in the XMARSEX variable.
+Now lets to analyze the DEGREE answers by year:
+
+```{r exploring_degree_by_year}
+     table(gss$degree, gss$year,useNA="ifany") 
+```
+
+It seems that the DEGREE variable was answered in all years. It can explain why the NAs values are much smaller then in XMARSEX.
+
+Now lets take a look in the relationship of the these two variables:
+
+```{r relationship_between_xmarsex_degree}
+   table(gss$degree,gss$xmarsex)
+```
+
+It seems that the majority of the population, independent of the degree,  think that is Always Wrong having sexual relations with someone different than your marriage partner.
+
+Here, some visualizations to facilitate the understanding of the data:
+
+The distribution of XMARSEX answers by year:
+
+```{r relationship_barplot_xmarsex_year}
+ barplot(table(gss$xmarsex,gss$year,useNA="ifany"),col=c("red", "yellow", "orange", "green", "grey", "white"),legend=c("Always Wrong", "Almst Always wrg", "Sometimes Wrong", "Not Wrong at All", "Other", "NA"))
+```
+
+Some visualizations of DEGREE Variable:
+
+```{r plot_,degree}
+plot(gss$degree)
+```
+
+```{r relationship_barplot_degree_xmarsex}
+ barplot(table(gss$degree,gss$year,useNA="ifany"),col=c("red", "yellow", "orange", "green", "grey", "white"),legend=c("Lt High School", "High School", "Junior College",  "Bachelor", "Graduate", "NA"))
+```
+
+About the relationship between the two variables: 
+
+```{r relationship_,mosaicplot_xmarsex_year}
+mosaicplot(table(gss$degree,gss$xmarsex), las=1)
+```
+
+In the mosaic plot visualization, you can see that the distribution for the Always Wrong option is decreasing as the level of education increases. Despite having fewer responses, the Not Wrong At All option has greater number of responses to the highest degree of education.
+
+
+
+
+
+### Inference:
+
+Insert inference section here...
+
+### Conclusion:
+
+Insert conclusion here...
+

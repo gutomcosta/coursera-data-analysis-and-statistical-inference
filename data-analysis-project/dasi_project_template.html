@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<!-- saved from url=(0014)about:internet -->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="x-ua-compatible" content="IE=9" >
+
+<title>TITLE</title>
+
+<style type="text/css">
+body, td {
+   font-family: sans-serif;
+   background-color: white;
+   font-size: 12px;
+   margin: 8px;
+}
+
+tt, code, pre {
+   font-family: 'DejaVu Sans Mono', 'Droid Sans Mono', 'Lucida Console', Consolas, Monaco, monospace;
+}
+
+h1 { 
+   font-size:2.2em; 
+}
+
+h2 { 
+   font-size:1.8em; 
+}
+
+h3 { 
+   font-size:1.4em; 
+}
+
+h4 { 
+   font-size:1.0em; 
+}
+
+h5 { 
+   font-size:0.9em; 
+}
+
+h6 { 
+   font-size:0.8em; 
+}
+
+a:visited {
+   color: rgb(50%, 0%, 50%);
+}
+
+pre {	
+   margin-top: 0;
+   max-width: 95%;
+   border: 1px solid #ccc;
+   white-space: pre-wrap;
+}
+
+pre code {
+   display: block; padding: 0.5em;
+}
+
+code.r, code.cpp {
+   background-color: #F8F8F8;
+}
+
+table, td, th {
+  border: none;
+}
+
+blockquote {
+   color:#666666;
+   margin:0;
+   padding-left: 1em;
+   border-left: 0.5em #EEE solid;
+}
+
+hr {
+   height: 0px;
+   border-bottom: none;
+   border-top-width: thin;
+   border-top-style: dotted;
+   border-top-color: #999999;
+}
+
+@media print {
+   * { 
+      background: transparent !important; 
+      color: black !important; 
+      filter:none !important; 
+      -ms-filter: none !important; 
+   }
+
+   body { 
+      font-size:12pt; 
+      max-width:100%; 
+   }
+       
+   a, a:visited { 
+      text-decoration: underline; 
+   }
+
+   hr { 
+      visibility: hidden;
+      page-break-before: always;
+   }
+
+   pre, blockquote { 
+      padding-right: 1em; 
+      page-break-inside: avoid; 
+   }
+
+   tr, img { 
+      page-break-inside: avoid; 
+   }
+
+   img { 
+      max-width: 100% !important; 
+   }
+
+   @page :left { 
+      margin: 15mm 20mm 15mm 10mm; 
+   }
+     
+   @page :right { 
+      margin: 15mm 10mm 15mm 20mm; 
+   }
+
+   p, h2, h3 { 
+      orphans: 3; widows: 3; 
+   }
+
+   h2, h3 { 
+      page-break-after: avoid; 
+   }
+}
+
+</style>
+
+<!-- Styles for R syntax highlighter -->
+<style type="text/css">
+   pre .operator,
+   pre .paren {
+     color: rgb(104, 118, 135)
+   }
+
+   pre .literal {
+     color: rgb(88, 72, 246)
+   }
+
+   pre .number {
+     color: rgb(0, 0, 205);
+   }
+
+   pre .comment {
+     color: rgb(76, 136, 107);
+   }
+
+   pre .keyword {
+     color: rgb(0, 0, 255);
+   }
+
+   pre .identifier {
+     color: rgb(0, 0, 0);
+   }
+
+   pre .string {
+     color: rgb(3, 106, 7);
+   }
+</style>
+
+<!-- R syntax highlighter -->
+<script type="text/javascript">
+var hljs=new function(){function m(p){return p.replace(/&/gm,"&amp;").replace(/</gm,"&lt;")}function f(r,q,p){return RegExp(q,"m"+(r.cI?"i":"")+(p?"g":""))}function b(r){for(var p=0;p<r.childNodes.length;p++){var q=r.childNodes[p];if(q.nodeName=="CODE"){return q}if(!(q.nodeType==3&&q.nodeValue.match(/\s+/))){break}}}function h(t,s){var p="";for(var r=0;r<t.childNodes.length;r++){if(t.childNodes[r].nodeType==3){var q=t.childNodes[r].nodeValue;if(s){q=q.replace(/\n/g,"")}p+=q}else{if(t.childNodes[r].nodeName=="BR"){p+="\n"}else{p+=h(t.childNodes[r])}}}if(/MSIE [678]/.test(navigator.userAgent)){p=p.replace(/\r/g,"\n")}return p}function a(s){var r=s.className.split(/\s+/);r=r.concat(s.parentNode.className.split(/\s+/));for(var q=0;q<r.length;q++){var p=r[q].replace(/^language-/,"");if(e[p]){return p}}}function c(q){var p=[];(function(s,t){for(var r=0;r<s.childNodes.length;r++){if(s.childNodes[r].nodeType==3){t+=s.childNodes[r].nodeValue.length}else{if(s.childNodes[r].nodeName=="BR"){t+=1}else{if(s.childNodes[r].nodeType==1){p.push({event:"start",offset:t,node:s.childNodes[r]});t=arguments.callee(s.childNodes[r],t);p.push({event:"stop",offset:t,node:s.childNodes[r]})}}}}return t})(q,0);return p}function k(y,w,x){var q=0;var z="";var s=[];function u(){if(y.length&&w.length){if(y[0].offset!=w[0].offset){return(y[0].offset<w[0].offset)?y:w}else{return w[0].event=="start"?y:w}}else{return y.length?y:w}}function t(D){var A="<"+D.nodeName.toLowerCase();for(var B=0;B<D.attributes.length;B++){var C=D.attributes[B];A+=" "+C.nodeName.toLowerCase();if(C.value!==undefined&&C.value!==false&&C.value!==null){A+='="'+m(C.value)+'"'}}return A+">"}while(y.length||w.length){var v=u().splice(0,1)[0];z+=m(x.substr(q,v.offset-q));q=v.offset;if(v.event=="start"){z+=t(v.node);s.push(v.node)}else{if(v.event=="stop"){var p,r=s.length;do{r--;p=s[r];z+=("</"+p.nodeName.toLowerCase()+">")}while(p!=v.node);s.splice(r,1);while(r<s.length){z+=t(s[r]);r++}}}}return z+m(x.substr(q))}function j(){function q(x,y,v){if(x.compiled){return}var u;var s=[];if(x.k){x.lR=f(y,x.l||hljs.IR,true);for(var w in x.k){if(!x.k.hasOwnProperty(w)){continue}if(x.k[w] instanceof Object){u=x.k[w]}else{u=x.k;w="keyword"}for(var r in u){if(!u.hasOwnProperty(r)){continue}x.k[r]=[w,u[r]];s.push(r)}}}if(!v){if(x.bWK){x.b="\\b("+s.join("|")+")\\s"}x.bR=f(y,x.b?x.b:"\\B|\\b");if(!x.e&&!x.eW){x.e="\\B|\\b"}if(x.e){x.eR=f(y,x.e)}}if(x.i){x.iR=f(y,x.i)}if(x.r===undefined){x.r=1}if(!x.c){x.c=[]}x.compiled=true;for(var t=0;t<x.c.length;t++){if(x.c[t]=="self"){x.c[t]=x}q(x.c[t],y,false)}if(x.starts){q(x.starts,y,false)}}for(var p in e){if(!e.hasOwnProperty(p)){continue}q(e[p].dM,e[p],true)}}function d(B,C){if(!j.called){j();j.called=true}function q(r,M){for(var L=0;L<M.c.length;L++){if((M.c[L].bR.exec(r)||[null])[0]==r){return M.c[L]}}}function v(L,r){if(D[L].e&&D[L].eR.test(r)){return 1}if(D[L].eW){var M=v(L-1,r);return M?M+1:0}return 0}function w(r,L){return L.i&&L.iR.test(r)}function K(N,O){var M=[];for(var L=0;L<N.c.length;L++){M.push(N.c[L].b)}var r=D.length-1;do{if(D[r].e){M.push(D[r].e)}r--}while(D[r+1].eW);if(N.i){M.push(N.i)}return f(O,M.join("|"),true)}function p(M,L){var N=D[D.length-1];if(!N.t){N.t=K(N,E)}N.t.lastIndex=L;var r=N.t.exec(M);return r?[M.substr(L,r.index-L),r[0],false]:[M.substr(L),"",true]}function z(N,r){var L=E.cI?r[0].toLowerCase():r[0];var M=N.k[L];if(M&&M instanceof Array){return M}return false}function F(L,P){L=m(L);if(!P.k){return L}var r="";var O=0;P.lR.lastIndex=0;var M=P.lR.exec(L);while(M){r+=L.substr(O,M.index-O);var N=z(P,M);if(N){x+=N[1];r+='<span class="'+N[0]+'">'+M[0]+"</span>"}else{r+=M[0]}O=P.lR.lastIndex;M=P.lR.exec(L)}return r+L.substr(O,L.length-O)}function J(L,M){if(M.sL&&e[M.sL]){var r=d(M.sL,L);x+=r.keyword_count;return r.value}else{return F(L,M)}}function I(M,r){var L=M.cN?'<span class="'+M.cN+'">':"";if(M.rB){y+=L;M.buffer=""}else{if(M.eB){y+=m(r)+L;M.buffer=""}else{y+=L;M.buffer=r}}D.push(M);A+=M.r}function G(N,M,Q){var R=D[D.length-1];if(Q){y+=J(R.buffer+N,R);return false}var P=q(M,R);if(P){y+=J(R.buffer+N,R);I(P,M);return P.rB}var L=v(D.length-1,M);if(L){var O=R.cN?"</span>":"";if(R.rE){y+=J(R.buffer+N,R)+O}else{if(R.eE){y+=J(R.buffer+N,R)+O+m(M)}else{y+=J(R.buffer+N+M,R)+O}}while(L>1){O=D[D.length-2].cN?"</span>":"";y+=O;L--;D.length--}var r=D[D.length-1];D.length--;D[D.length-1].buffer="";if(r.starts){I(r.starts,"")}return R.rE}if(w(M,R)){throw"Illegal"}}var E=e[B];var D=[E.dM];var A=0;var x=0;var y="";try{var s,u=0;E.dM.buffer="";do{s=p(C,u);var t=G(s[0],s[1],s[2]);u+=s[0].length;if(!t){u+=s[1].length}}while(!s[2]);if(D.length>1){throw"Illegal"}return{r:A,keyword_count:x,value:y}}catch(H){if(H=="Illegal"){return{r:0,keyword_count:0,value:m(C)}}else{throw H}}}function g(t){var p={keyword_count:0,r:0,value:m(t)};var r=p;for(var q in e){if(!e.hasOwnProperty(q)){continue}var s=d(q,t);s.language=q;if(s.keyword_count+s.r>r.keyword_count+r.r){r=s}if(s.keyword_count+s.r>p.keyword_count+p.r){r=p;p=s}}if(r.language){p.second_best=r}return p}function i(r,q,p){if(q){r=r.replace(/^((<[^>]+>|\t)+)/gm,function(t,w,v,u){return w.replace(/\t/g,q)})}if(p){r=r.replace(/\n/g,"<br>")}return r}function n(t,w,r){var x=h(t,r);var v=a(t);var y,s;if(v){y=d(v,x)}else{return}var q=c(t);if(q.length){s=document.createElement("pre");s.innerHTML=y.value;y.value=k(q,c(s),x)}y.value=i(y.value,w,r);var u=t.className;if(!u.match("(\\s|^)(language-)?"+v+"(\\s|$)")){u=u?(u+" "+v):v}if(/MSIE [678]/.test(navigator.userAgent)&&t.tagName=="CODE"&&t.parentNode.tagName=="PRE"){s=t.parentNode;var p=document.createElement("div");p.innerHTML="<pre><code>"+y.value+"</code></pre>";t=p.firstChild.firstChild;p.firstChild.cN=s.cN;s.parentNode.replaceChild(p.firstChild,s)}else{t.innerHTML=y.value}t.className=u;t.result={language:v,kw:y.keyword_count,re:y.r};if(y.second_best){t.second_best={language:y.second_best.language,kw:y.second_best.keyword_count,re:y.second_best.r}}}function o(){if(o.called){return}o.called=true;var r=document.getElementsByTagName("pre");for(var p=0;p<r.length;p++){var q=b(r[p]);if(q){n(q,hljs.tabReplace)}}}function l(){if(window.addEventListener){window.addEventListener("DOMContentLoaded",o,false);window.addEventListener("load",o,false)}else{if(window.attachEvent){window.attachEvent("onload",o)}else{window.onload=o}}}var e={};this.LANGUAGES=e;this.highlight=d;this.highlightAuto=g;this.fixMarkup=i;this.highlightBlock=n;this.initHighlighting=o;this.initHighlightingOnLoad=l;this.IR="[a-zA-Z][a-zA-Z0-9_]*";this.UIR="[a-zA-Z_][a-zA-Z0-9_]*";this.NR="\\b\\d+(\\.\\d+)?";this.CNR="\\b(0[xX][a-fA-F0-9]+|(\\d+(\\.\\d*)?|\\.\\d+)([eE][-+]?\\d+)?)";this.BNR="\\b(0b[01]+)";this.RSR="!|!=|!==|%|%=|&|&&|&=|\\*|\\*=|\\+|\\+=|,|\\.|-|-=|/|/=|:|;|<|<<|<<=|<=|=|==|===|>|>=|>>|>>=|>>>|>>>=|\\?|\\[|\\{|\\(|\\^|\\^=|\\||\\|=|\\|\\||~";this.ER="(?![\\s\\S])";this.BE={b:"\\\\.",r:0};this.ASM={cN:"string",b:"'",e:"'",i:"\\n",c:[this.BE],r:0};this.QSM={cN:"string",b:'"',e:'"',i:"\\n",c:[this.BE],r:0};this.CLCM={cN:"comment",b:"//",e:"$"};this.CBLCLM={cN:"comment",b:"/\\*",e:"\\*/"};this.HCM={cN:"comment",b:"#",e:"$"};this.NM={cN:"number",b:this.NR,r:0};this.CNM={cN:"number",b:this.CNR,r:0};this.BNM={cN:"number",b:this.BNR,r:0};this.inherit=function(r,s){var p={};for(var q in r){p[q]=r[q]}if(s){for(var q in s){p[q]=s[q]}}return p}}();hljs.LANGUAGES.cpp=function(){var a={keyword:{"false":1,"int":1,"float":1,"while":1,"private":1,"char":1,"catch":1,"export":1,virtual:1,operator:2,sizeof:2,dynamic_cast:2,typedef:2,const_cast:2,"const":1,struct:1,"for":1,static_cast:2,union:1,namespace:1,unsigned:1,"long":1,"throw":1,"volatile":2,"static":1,"protected":1,bool:1,template:1,mutable:1,"if":1,"public":1,friend:2,"do":1,"return":1,"goto":1,auto:1,"void":2,"enum":1,"else":1,"break":1,"new":1,extern:1,using:1,"true":1,"class":1,asm:1,"case":1,typeid:1,"short":1,reinterpret_cast:2,"default":1,"double":1,register:1,explicit:1,signed:1,typename:1,"try":1,"this":1,"switch":1,"continue":1,wchar_t:1,inline:1,"delete":1,alignof:1,char16_t:1,char32_t:1,constexpr:1,decltype:1,noexcept:1,nullptr:1,static_assert:1,thread_local:1,restrict:1,_Bool:1,complex:1},built_in:{std:1,string:1,cin:1,cout:1,cerr:1,clog:1,stringstream:1,istringstream:1,ostringstream:1,auto_ptr:1,deque:1,list:1,queue:1,stack:1,vector:1,map:1,set:1,bitset:1,multiset:1,multimap:1,unordered_set:1,unordered_map:1,unordered_multiset:1,unordered_multimap:1,array:1,shared_ptr:1}};return{dM:{k:a,i:"</",c:[hljs.CLCM,hljs.CBLCLM,hljs.QSM,{cN:"string",b:"'\\\\?.",e:"'",i:"."},{cN:"number",b:"\\b(\\d+(\\.\\d*)?|\\.\\d+)(u|U|l|L|ul|UL|f|F)"},hljs.CNM,{cN:"preprocessor",b:"#",e:"$"},{cN:"stl_container",b:"\\b(deque|list|queue|stack|vector|map|set|bitset|multiset|multimap|unordered_map|unordered_set|unordered_multiset|unordered_multimap|array)\\s*<",e:">",k:a,r:10,c:["self"]}]}}}();hljs.LANGUAGES.r={dM:{c:[hljs.HCM,{cN:"number",b:"\\b0[xX][0-9a-fA-F]+[Li]?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+(?:[eE][+\\-]?\\d*)?L\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+\\.(?!\\d)(?:i\\b)?",e:hljs.IMMEDIATE_RE,r:1},{cN:"number",b:"\\b\\d+(?:\\.\\d*)?(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\.\\d+(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"keyword",b:"(?:tryCatch|library|setGeneric|setGroupGeneric)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\.",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\d+(?![\\w.])",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\b(?:function)",e:hljs.IMMEDIATE_RE,r:2},{cN:"keyword",b:"(?:if|in|break|next|repeat|else|for|return|switch|while|try|stop|warning|require|attach|detach|source|setMethod|setClass)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"literal",b:"(?:NA|NA_integer_|NA_real_|NA_character_|NA_complex_)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"literal",b:"(?:NULL|TRUE|FALSE|T|F|Inf|NaN)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"identifier",b:"[a-zA-Z.][a-zA-Z0-9._]*\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"<\\-(?!\\s*\\d)",e:hljs.IMMEDIATE_RE,r:2},{cN:"operator",b:"\\->|<\\-",e:hljs.IMMEDIATE_RE,r:1},{cN:"operator",b:"%%|~",e:hljs.IMMEDIATE_RE},{cN:"operator",b:">=|<=|==|!=|\\|\\||&&|=|\\+|\\-|\\*|/|\\^|>|<|!|&|\\||\\$|:",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"%",e:"%",i:"\\n",r:1},{cN:"identifier",b:"`",e:"`",r:0},{cN:"string",b:'"',e:'"',c:[hljs.BE],r:0},{cN:"string",b:"'",e:"'",c:[hljs.BE],r:0},{cN:"paren",b:"[[({\\])}]",e:hljs.IMMEDIATE_RE,r:0}]}};
+hljs.initHighlightingOnLoad();
+</script>
+
+
+
+
+</head>
+
+<body>
+<!-- Make sure that the knitr package is installed and loaded. -->
+
+<!-- For more info on the package options see http://yihui.name/knitr/options -->
+
+<!-- Replace below with the title of your project -->
+
+<h3>TITLE</h3>
+
+<!-- Enter the code required to load your data in the space below. The data will be loaded but the line of code won't show up in your write up (echo=FALSE) in order to save space-->
+
+<!-- In the remainder of the document, add R code chunks as needed -->
+
+<h3>Introduction:</h3>
+
+<p>This is an Data Analysis project for the Data Analysis and Statistical Inference course of Coursera. 
+My main goal with this work, is trying to provide some kinds of evidence that <strong>there is a relationship between the degree of education and the opinion about having sex with other person than spouse.</strong></p>
+
+<p>I believe that studying the relationship between the degree of education and some behavioral or social aspects can be help to realize an approximation or distancing of some individual values, for example, in case of this study, betrayal. </p>
+
+<p>This work can be important for sociologists or psychologist, that want to have a better understanding of the human behavior associated with the education degree.</p>
+
+<h3>Data:</h3>
+
+<p>The study is based on the General Social Survey dataset, <em>Smith, Tom W., Michael Hout, and Peter V. Marsden. General Social Survey, 1972-2012 [Cumulative File]</em> . This is a sociological survey used to collect data on demographic characteristics and attitudes of residents of the United States.</p>
+
+<p>The dataset can be found online at: <a href="http://bit.ly/dasi_gss_data">http://bit.ly/dasi_gss_data</a>.
+The dataset cookbook can be found here: <a href="https://d396qusza40orc.cloudfront.net/statistics%2Fproject%2Fgss1.html#educ">https://d396qusza40orc.cloudfront.net/statistics%2Fproject%2Fgss1.html#educ</a></p>
+
+<p>The data was collected via survey from 1972 until 2012. Until 1993, GSS was administered almost annually. The target sample size for the annual surveys was 1500; actual sample sizes ranged between 1372 (1990) and 1613 (1972). There were no GSSs in 1979,1981 and 1992.
+Since 1994, the GSS has been administered to two samples in event-numbered years, each with a target sample size of 1500, than to a single 1500 person sample each year.
+Some questions in the survey, are no applicable to some respondents. For example, the question on martial happiness is only asked of currently married respondents.</p>
+
+<p>For this study, each case represents the respondent of the survey.
+The variables analyzed by this study are:</p>
+
+<ul>
+<li>DEGREE - a categorical variable that represent the respondent&#39;s highest degree of education </li>
+<li>XMARSEX -  a categorical variable that represent the opinion of respondents about having sexual relations with someone than the marriage partner.</li>
+</ul>
+
+<p>This is an observational study, because the data was collected by a survey and there is no interference in that data.
+The population of interests is a person resident in United States. 
+Based on in the idea that Generalization is based on in the combination of two things: Random Sample and Random Assignment, the study can be generalized to the population of USA, but it&#39;s not Causal.
+There are some interesting source of bias in the study. First, the respondents can not answer a question, it means there is a Non-Response source of bias. Beside that, there is a kind of Convenience Sample, because the survey is mainly focused on Household, this type of responder are more accessible than others, for example, a person that needs go to the work every day.</p>
+
+<p>There is no causality in these variables, because there is no Random Assignment associated with the study.</p>
+
+<h3>Exploratory data analysis:</h3>
+
+<p>The objective of this study is trying to understand the relationship of two categorical variables: DEGREE and XMARSEX.
+Before start a study more deeper about this relationship, we will take a look on each column data separately.</p>
+
+<p>Let&#39;s investigate the data in XMARSEX column:</p>
+
+<pre><code class="r">table(gss$xmarsex, useNA = &quot;ifany&quot;)
+</code></pre>
+
+<pre><code>## 
+##     Always Wrong Almst Always Wrg  Sometimes Wrong Not Wrong At All 
+##            25929             4581             2652              857 
+##            Other             &lt;NA&gt; 
+##                0            23042
+</code></pre>
+
+<p>At the first impression, seems that the majority of the population thinks that the &ldquo;having sexual relation with someone than you marriage partner&rdquo; is Always Wrong. Just a little part of this population think that is Not Wrong at All.
+The XMARSEX is categorical variable. To explore how representative are the answers for each option, we will build a frequency table for her.</p>
+
+<p>Take a look at the frequency table: </p>
+
+<pre><code class="r">table(gss$xmarsex, useNA = &quot;ifany&quot;)/dim(gss)[1]
+</code></pre>
+
+<pre><code>## 
+##     Always Wrong Almst Always Wrg  Sometimes Wrong Not Wrong At All 
+##          0.45441          0.08028          0.04648          0.01502 
+##            Other             &lt;NA&gt; 
+##          0.00000          0.40381
+</code></pre>
+
+<p>As we said before, about 45% of the population, believes that is Always Wrong having sexual relation with someone different of his spouse and just 1.5% believes that is not Wrong at all.
+It&#39;s important to note that this variable have a significant number of NA&#39;s responses, about 40%, that can be justified by the fact that GSS survey was not executed in some years.
+To verifiy that the NAs answers is related with the years that GSS survey was not executed, we can group the responses by years:</p>
+
+<pre><code class="r">table(gss$xmarsex, gss$year, useNA = &quot;ifany&quot;)
+</code></pre>
+
+<pre><code>##                   
+##                    1972 1973 1974 1975 1976 1977 1978 1980 1982 1983 1984
+##   Always Wrong        0 1037 1082    0 1013 1103    0 1018 1333    0 1023
+##   Almst Always Wrg    0  220  173    0  230  206    0  230  237    0  264
+##   Sometimes Wrong     0  173  169    0  169  153    0  143  194    0  129
+##   Not Wrong At All    0   61   36    0   63   48    0   53   57    0   33
+##   Other               0    0    0    0    0    0    0    0    0    0    0
+##   &lt;NA&gt;             1613   13   24 1490   24   20 1532   24   39 1599   24
+##                   
+##                    1985 1986 1987 1988 1989 1990 1991 1993 1994 1996 1998
+##   Always Wrong     1132    0 1308  764  797  709  738  815 1546 1471 1466
+##   Almst Always Wrg  207    0  263  125  131  115  132  152  248  285  231
+##   Sometimes Wrong   130    0  165   54   74   63   63   60  130   98  107
+##   Not Wrong At All   43    0   48   20   17   13   31   26   46   35   44
+##   Other               0    0    0    0    0    0    0    0    0    0    0
+##   &lt;NA&gt;               22 1470   35  518  518  472  553  553 1022 1015  984
+##                   
+##                    2000 2002 2004 2006 2008 2010 2012
+##   Always Wrong     1448  725  717 1582 1088  988 1026
+##   Almst Always Wrg  198  124  107  236  144  168  155
+##   Sometimes Wrong   130   39   44  121   76   81   87
+##   Not Wrong At All   47   19   19   36   20   26   16
+##   Other               0    0    0    0    0    0    0
+##   &lt;NA&gt;              994 1858 1925 2535  695  781  690
+</code></pre>
+
+<p>There were no GSSs in 1979,1981 and 1992. As we can see in the table, in these years we don&#39;t have information about the NAs, because the data were not inserted in this dataset. In this case, the higher number of NAs is not related with the years that GSS was not executed.
+A important information is that some questions may not exist in all years. This is due to the fact that a question may not have been taken in that year. For example in 1972, 1978, 1983 and 1986 the NAs answer is higher, probably this question was not taken in these years. This is an important factor for higher number of NA answers.</p>
+
+<p>Now, lets do the same analysis to DEGREE variable.</p>
+
+<p>First, here a simple table of DEGREE variable data:</p>
+
+<pre><code class="r">table(gss$degree, useNA = &quot;ifany&quot;)
+</code></pre>
+
+<pre><code>## 
+## Lt High School    High School Junior College       Bachelor       Graduate 
+##          11822          29287           3070           8002           3870 
+##           &lt;NA&gt; 
+##           1010
+</code></pre>
+
+<p>At the first impression, we can note that the majority of the population degree of education is concentrated between Lt High School and High School Junior.
+Another important thing to note is the number of NAs responses, 1010. This number is much smaller than the XMARSEX, but it&#39;s still loud.</p>
+
+<p>Take a look at the frequency table for DEGREE variable.</p>
+
+<pre><code class="r">table(gss$degree, useNA = &quot;ifany&quot;)/dim(gss)[1]
+</code></pre>
+
+<pre><code>## 
+## Lt High School    High School Junior College       Bachelor       Graduate 
+##        0.20718        0.51326        0.05380        0.14024        0.06782 
+##           &lt;NA&gt; 
+##        0.01770
+</code></pre>
+
+<p>Looking the data, we can see that the NA values represents about 1.7% of the total. Is much smaller than the 40% of the NAs in the XMARSEX variable.
+Now lets to analyze the DEGREE answers by year:</p>
+
+<pre><code class="r">table(gss$degree, gss$year, useNA = &quot;ifany&quot;)
+</code></pre>
+
+<pre><code>##                 
+##                  1972 1973 1974 1975 1976 1977 1978 1980 1982 1983 1984
+##   Lt High School  587  510  479  492  482  488  431  407  539  385  374
+##   High School     762  720  722  732  728  741  804  745  938  835  764
+##   Junior College   17   20   25   33   24   34   42   45   74   61   54
+##   Bachelor        124  132  139  140  152  139  151  158  165  202  175
+##   Graduate         52   65   73   50   61   74   62   71   84   80   77
+##   &lt;NA&gt;             71   57   46   43   52   54   42   42   60   36   29
+##                 
+##                  1985 1986 1987 1988 1989 1990 1991 1993 1994 1996 1998
+##   Lt High School  387  376  441  335  315  268  280  267  478  425  409
+##   High School     795  750  934  785  814  726  825  840 1586 1567 1500
+##   Junior College   60   48   77   65   96   75   73   97  176  187  209
+##   Bachelor        175  192  238  179  189  197  224  253  497  471  478
+##   Graduate         90   80   87   89   95   87   81  118  216  224  205
+##   &lt;NA&gt;             27   24   42   28   28   19   34   31   39   30   31
+##                 
+##                  2000 2002 2004 2006 2008 2010 2012
+##   Lt High School  419  386  347  659  283  293  280
+##   High School    1501 1485 1435 2273 1003 1001  976
+##   Junior College  206  202  224  377  173  145  151
+##   Bachelor        435  443  507  763  355  375  354
+##   Graduate        218  230  281  403  194  218  205
+##   &lt;NA&gt;             38   19   18   35   15   12    8
+</code></pre>
+
+<p>It seems that the DEGREE variable was answered in all years. It can explain why the NAs values are much smaller then in XMARSEX.</p>
+
+<p>Now lets take a look in the relationship of the these two variables:</p>
+
+<pre><code class="r">table(gss$degree, gss$xmarsex)
+</code></pre>
+
+<pre><code>##                 
+##                  Always Wrong Almst Always Wrg Sometimes Wrong
+##   Lt High School         5888              592             498
+##   High School           13588             2224            1281
+##   Junior College         1362              242             117
+##   Bachelor               3191              920             427
+##   Graduate               1369              563             289
+##                 
+##                  Not Wrong At All Other
+##   Lt High School              208     0
+##   High School                 398     0
+##   Junior College               52     0
+##   Bachelor                    103     0
+##   Graduate                     85     0
+</code></pre>
+
+<p>It seems that the majority of the population, independent of the degree,  think that is Always Wrong having sexual relations with someone different than your marriage partner.</p>
+
+<p>Here, some visualizations to facilitate the understanding of the data:</p>
+
+<p>The distribution of XMARSEX answers by year:</p>
+
+<pre><code class="r">barplot(table(gss$xmarsex, gss$year, useNA = &quot;ifany&quot;), col = c(&quot;red&quot;, &quot;yellow&quot;, 
+    &quot;orange&quot;, &quot;green&quot;, &quot;grey&quot;, &quot;white&quot;), legend = c(&quot;Always Wrong&quot;, &quot;Almst Always wrg&quot;, 
+    &quot;Sometimes Wrong&quot;, &quot;Not Wrong at All&quot;, &quot;Other&quot;, &quot;NA&quot;))
+</code></pre>
+
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAfgAAAH4CAMAAACR9g9NAAABI1BMVEX9/v0AAAAAADkAADoAAGUAAGYAOTkAOWUAOY8AOmYAOpAAZo8AZpAAZrUAZrYA/wA5AAA5ADk5AGU5OWU5OY85ZrU5j7U5j9o6AAA6ADo6AGY6OmY6OpA6ZrY6kNtlAABlADllAGVlOQBlOTllOY9lZgBlZmVlj49ltf1mAABmADpmAGZmOgBmZmZmkJBmtv+POQCPOTmPOWWPZgCPj2WPtY+P27WP29qP2/2QOgCQOjqQOmaQZgCQkGaQtpCQ2/+1ZgC1Zjm1tWW124+1/rW1/tq1/v22ZgC2Zjq225C2/7a2//++vr7ajzna24/a/tra/v3bkDrb/9vb///9tWX924/9/rX9/tr9/v3/AAD/pQD/tmb/25D//wD//7b//9v///+aMbrsAAAAYXRSTlP/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////AP//////////ys2M9wAAAAlwSFlzAAALEgAACxIB0t1+/AAAFJpJREFUeJztnQub20a5gFFID4HDttttgjmFZpu2wJYC2RTK8SlwsqFlCwTDlvqitNvE//9XoNHF0sia0UgeWZfvfZ82juPPI1mv5qZPY38nBJF8p+8dgH5AvFAQLxTECwXxQkG8UBAvFMQLBfFCQbxQEC8UxAsF8UJBvFAQLxTECwXxQkG8UBAvFMQLBfFCQbxQEC8UxAsF8UJBvFAQLxTECwXxQkG8UBAvFMQLBfFCQbxQEC8UxAsF8UJBvFAQLxTECwXxQkG8UBAvFMQLBfFCQbxQEC8UxAsF8UJBvFAQLxTECwXxQkG8UBAvFMQLBfFCQbxQED9MggKdbADxwyTY7kC8JBAvFMQLBfFCQbxQED8mgmHgtK+I94jHunlAjUf80UG8UBAvFMQLBfFCQbxQEC8UxAsF8UJBvFAKh7zi+unq9EL9eXYdhut353VFIX5EFMXvW1ud3r1OxS9/PqsrCvEjokb82Z9PEvGbJ7//4KamKMSPiDrx11cXsfjV/Zuri5qiED8iasWvP7hR4hezcHlSUxTiR0St+Eh59OfmMhr0qf7eVhTiR0S9+M2T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" alt="plot of chunk relationship_barplot_xmarsex_year"/> </p>
+
+<p>Some visualizations of DEGREE Variable:</p>
+
+<pre><code class="r">plot(gss$degree)
+</code></pre>
+
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAfgAAAH4CAMAAACR9g9NAAAAflBMVEX9/v0AAAAAADkAAGUAOTkAOWUAOY8AZo8AZrU5AAA5ADk5AGU5OWU5OY85ZrU5j485j9plAABlADllAGVlOQBlOTllZgBltf2POQCPOTmPOWWPZgCP29qP2/21ZgC124+1/v2+vr7ajzna24/a/v39tWX924/9/rX9/tr9/v1ITiOFAAAAKnRSTlP//////////////////////////////////////////////////////wAyqPBcAAAACXBIWXMAAAsSAAALEgHS3X78AAALLUlEQVR4nO2dYWPayBUAD6d3dZI6dS7Xmqaxm7o2wf//D1YrBAYka3W7K7IwMx+iIODpPYZFb42t/eVFkPzysxOQn4PioSgeiuKhKB6K4qEoHorioSgeiuKhKB6K4qEoHorioSgeiuKhKB6K4qEoHorioSgeiuKhKB6K4qEoHorioSgeiuKhKB6K4qEoHorioSgeiuKhKB6K4qEoHorioSgeiuKhKB6K4qEoHorioSgeiuKhKB6K4qEoHorioSgeiuKhKB6K4qEoHorioSgeiuKh1Ct+UYCfXUPFVCz+v9ko/m0UD0XxUBQPRfFQFA9F8VAUD0XxUBQPRfFQFA9F8VAUD0XxUBQPRfFQFA9F8VAUD0XxUBQPRfFQFA9F8VAUD0XxUBQPRfFQFA9F8VAUD0XxUBQPRfFQFA8lLn71vr2O0LvvJ8hmH8XPSlT8ennXbp9/e5o9mQMUPytR8T++fD/YngzFz4ojHkr8HP/js+f4C8SuHorioTidg2JzB8XpHBRHPBSnc1Ds6qEoHorTOSg2d1BSpnOnWetH8bOSM+IVf8bkTOcUf8bkdPWKP2MUD2VScxc+7QeaesWfMVPEtw396lPvLsWfMVPEr26eBr+dU/wZExf/+erb1zDib5zOXRITmrv1cnH98ux07rKwq4eieCiTvp27ure5uzQm/ax+vbxV/IUx8du5h2vFXxZTv517/MtHxV8SU76duw2bx/58TvFnjF09FMVDUTwUxUNRPBTFQ1E8FMVDUTwUxUNRPBTFQ1E8FMVDUTwUxUNRPBTFQ1E8FMVDUTwUxUNRPBTFQ1E8FMVDUTwUxUNRPBTFQ8lZqEDxZ4yXLYeSs+6c4s8YRzwUFyqAYlcP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" alt="plot of chunk plot_,degree"/> </p>
+
+<pre><code class="r">barplot(table(gss$degree, gss$year, useNA = &quot;ifany&quot;), col = c(&quot;red&quot;, &quot;yellow&quot;, 
+    &quot;orange&quot;, &quot;green&quot;, &quot;grey&quot;, &quot;white&quot;), legend = c(&quot;Lt High School&quot;, &quot;High School&quot;, 
+    &quot;Junior College&quot;, &quot;Bachelor&quot;, &quot;Graduate&quot;, &quot;NA&quot;))
+</code></pre>
+
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAfgAAAH4CAMAAACR9g9NAAAAyVBMVEX9/v0AAAAAADkAAGUAOTkAOWUAOY8AOgAAQgAAZgAAZo8AZrUAkAAAtgAA2wAA/wA5AAA5ADk5AGU5OWU5OY85j485j7U5j9o6AABMh75lAABlADllAGVlOQBlOTllOY9lZgBlZmVltf1mAABrKwCPOQCPOTmPOWWPZgCPtY+P27WP29qP2/2QJQCQjgC1ZgC1tWW124+1/tq1/v22pQC+vr7ajzna24/a/v39tWX924/9/rX9/tr9/v3/AAD/jgD/pQD//wD///8/rf9iAAAAQ3RSTlP/////////////////////////////////////////////////////////////////////////////////AP//////iKRArgAAAAlwSFlzAAALEgAACxIB0t1+/AAAFIlJREFUeJztnQt727YVhst4tZclsd3Umzc3XTZtTtvNrbd5Ua0Lu6T//0eNAEESIHnAwwtEkOd7n8dRIB2Bl5e4EST1RQpE8sXcKwDmAeKFAvFCgXihQLxQIF4oEC8UiBcKxAsF4oUC8UKBeKFAvFAgXigQLxSIFwrECwXihQLxQoF4oUC8UCBeKBAvFIgXCsQLBeKFAvFCgXihQLxQIF4oEC8UiBcKxAsF4oUC8UKBeKFAvFAgXigQLxSIFwrECwXihQLxQoF4oUC8UCBeKBAvFIgXCsQLBeKFAvFCgXihQLxQIF4oEC8UiBcKxAsF4oUC8XGSWARZAMTHSfJrCcRLAiVeKMnHEoiXBMQLBeKFAvFLJzk9rPWC+MAMLK8jSjzERwHECwXihQLxQoF4oUC8UCBeKBAvFIgXCsQLxdLQdlJ1f71R/759StPDNw9WLMQvHFt8yzU1++uzJyN+99dbKxbiF06X+Lf/epWLP374x/vnKhbiF06n+KfHjRa/v3l+3FSxEL9wusUf3j8r8dvbdPeqioX4hdMtPlOe/Xu8zzp9qr03sRC/cBjijx9+ePuU1fRpWtX1EL90uoZzqj+vuvZb5byq6yF+6XRo0OLT7dl/vlOv1VAe4pfOcs/c7a917VT1O0AfFiv+eJ93OHbnzx2RoI3Fij+8e3JeQT8WKx4lfhyLFZ8e7tDGj6BjOEd+bX7xYBS2+FaVu+xAeFX/Vpr8/U9u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" alt="plot of chunk relationship_barplot_degree_xmarsex"/> </p>
+
+<p>About the relationship between the two variables: </p>
+
+<pre><code class="r">mosaicplot(table(gss$degree, gss$xmarsex), las = 1)
+</code></pre>
+
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAfgAAAH4CAMAAACR9g9NAAAA/1BMVEX9/v0AAAAAAA0AACAAADkAAGUAOTkAOY8AZo8AZrUXAAAXKDkgAAAgWLUoj9o5AAA5ADk5KAA5OQA5OTk5OY85ZrU5j485j7U5j9o5nP1ISQBlAABlADllAGVlOWVlOY9lZjllZmVlZo9lZrVlj49lj7Vlj9pltbVltdpltf2POQCPOTmPOWWPZo+PjzmPj2WPj4+Pj7WPtY+Ptf2P27WP2/21SRe1WCC1ZgC1Zjm1ZmW1jzm1j2W1j4+1tWW124+1/rW1/tq1/v2+vr7aeyDajzHajznaj2Xaj4/atWXa2/3a/rXa/tra/v39tWX9tY/9vFH924/9/rX9/tr9/v3lUxZ9AAAAVXRSTlP///////////////////////////////////////////////////////////////////////////////////////////////////////////////8AsKEHzwAAAAlwSFlzAAALEgAACxIB0t1+/AAAEk9JREFUeJztnQ1720Z2RhetZK/6pW0cbdiqTuwq0QauVGezZis52cTLtlCyjbAFxf//W4oBCPJaJnn5GtCI0pzzPLIAXOAliIPBlznir2aQJL+67xWA+wHxiYL4REF8oiA+URCfKIhPFMQnCuITBfGJgvhEQXyiID5REJ8oiE8UxCcK4hMF8YmC+ERBfKIgPlEQnyiITxTEJ8pjFl+MHmZ2FHZX/EW+GLx5tT9pBqbH84GWYm+8fvnpcZY9ve6Gu6FhsNkfR3V4z3vOzoq/yFzx0+OD9csHN1l20I0MKv697I/k4r1dOD47Kv7mVbNly/rfulXX4n9omlgrvqinhr2iCP/Wc+6/C16rwywL1fnvMnv63W/D7CHqd434brlukZtXey9CfDd9ObBci43Z1eH+pJ4nL7Nf13NOimbpxTo34d2SXXa3SD3b/Tb5nRbftqxgKGsHGvEXzcgobNpxO+OTw1DqZml/V4dPvxt1Sc1es1xuvkgz8PS6m76Y4b2V2JQdDkvlfP9s2Z+8t85P//f41ot3iwx+9lHZUfHLQ31wXW/EUT2wN542zazeYuHgP23bYr0rFK2MZkN2v5tNPZrdmiEst5hSxx7MF2inzwe6VXCz63V6ctgcAcLSWR5W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" alt="plot of chunk relationship_,mosaicplot_xmarsex_year"/> </p>
+
+<p>In the mosaic plot visualization, you can see that the distribution for the Always Wrong option is decreasing as the level of education increases. Despite having fewer responses, the Not Wrong At All option has greater number of responses to the highest degree of education.</p>
+
+<h3>Inference:</h3>
+
+<p>Insert inference section here&hellip;</p>
+
+<h3>Conclusion:</h3>
+
+<p>Insert conclusion here&hellip;</p>
+
+</body>
+
+</html>
+

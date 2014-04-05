@@ -6,11 +6,6 @@ row4 = c(208,398,52,103,85)
 data.table = rbind(row1,row2, row3, row4)
 data.table
 
-dimnames(data.table) <- list(weight = c("Always Wrong","), status= c("dating","cohabiting","married"))
-
-
-chisq.test(data.table)
-
 V <- addmargins(table(gss$xmarsex,gss$degree))
 
 

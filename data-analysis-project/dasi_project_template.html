@@ -416,11 +416,168 @@ Now lets to analyze the DEGREE answers by year:</p>
 
 <h3>Inference:</h3>
 
-<p>Insert inference section here&hellip;</p>
+<p>I want to check with my study if the degree of education influences in the opinion about having sexual relations with someone different than your marriage partner.
+For verify this, I will use the <strong>chi-square independent test</strong>. </p>
+
+<p>The first thing we need to do is build a contingency table for very the relationship between the variables DEGREE and XMARSEX.</p>
+
+<pre><code class="r">addmargins(table(gss$xmarsex, gss$degree))
+</code></pre>
+
+<pre><code>##                   
+##                    Lt High School High School Junior College Bachelor
+##   Always Wrong               5888       13588           1362     3191
+##   Almst Always Wrg            592        2224            242      920
+##   Sometimes Wrong             498        1281            117      427
+##   Not Wrong At All            208         398             52      103
+##   Other                         0           0              0        0
+##   Sum                        7186       17491           1773     4641
+##                   
+##                    Graduate   Sum
+##   Always Wrong         1369 25398
+##   Almst Always Wrg      563  4541
+##   Sometimes Wrong       289  2612
+##   Not Wrong At All       85   846
+##   Other                   0     0
+##   Sum                  2306 33397
+</code></pre>
+
+<p>Hypotheses for this study are:</p>
+
+<p><strong>H0 (nothing going on)</strong>: XMARSEX and DEGREE of education are <strong>independent</strong>. The opinion about having sexual relations with other than your spouse is not related with degree of education.
+<strong>H1(something going on): XMARSEX and DEGREE of education are __dependent</strong>. The opinion about having sexual relations with other than your spouse is related with degree of education.</p>
+
+<p>We need to check the conditions for the chi-squared test:</p>
+
+<p>1) <strong>Independence:</strong> </p>
+
+<ul>
+<li>random sample/assignment ? Ok</li>
+<li>if sample without replacement, n &lt; 10% of population? Ok</li>
+<li>each case only contributes to one cell in the table? Ok</li>
+</ul>
+
+<p>2) <strong>Sample size:</strong> Each particular scenario (i.e cell) must have at least 5 expected cases? Ok</p>
+
+<p>The process of  execute a chi-square test of independence follows a set o steps that are:</p>
+
+<ul>
+<li><p>calculate the expected values for each level and compare this with the observed value</p></li>
+<li><p>calculate the X squared </p></li>
+<li><p>calculate the degrees of freedom</p></li>
+<li><p>and use the pchisq function and calculate the p-value.</p></li>
+</ul>
+
+<p>We do not calculate this by hand and we will use the Inference function in R to execute the chi-squared test for us.</p>
+
+<p>First, take a look again on the relationship of XMARSEX and DEGREE:</p>
+
+<pre><code class="r">table(gss$xmarsex, gss$degree)
+</code></pre>
+
+<pre><code>##                   
+##                    Lt High School High School Junior College Bachelor
+##   Always Wrong               5888       13588           1362     3191
+##   Almst Always Wrg            592        2224            242      920
+##   Sometimes Wrong             498        1281            117      427
+##   Not Wrong At All            208         398             52      103
+##   Other                         0           0              0        0
+##                   
+##                    Graduate
+##   Always Wrong         1369
+##   Almst Always Wrg      563
+##   Sometimes Wrong       289
+##   Not Wrong At All       85
+##   Other                   0
+</code></pre>
+
+<p>Observe the row correspondent to the <strong>Other</strong> opnion for XMARSEX. There is no value for any column, just zero. 
+To execute the chi-squared test correctly we need to remove all the 0 values for variables. </p>
+
+<p>Let&#39;s drop the columns with 0 values:</p>
+
+<pre><code class="r"># just columns of interest, gss$degree and gss$xmarsex
+gss_with_degree_and_xmarsex &lt;- gss[c(12, 94)]
+
+# remove rows with NAs in either column
+gss_with_degree_and_xmarsex_without_NA_columns &lt;- gss_with_degree_and_xmarsex[!is.na(gss_with_degree_and_xmarsex[, 
+    1]) &amp; !is.na(gss_with_degree_and_xmarsex[, 2]), ]
+
+# droplevels
+gss_with_degree_and_xmarsex_without_NA_columns &lt;- droplevels(gss_with_degree_and_xmarsex_without_NA_columns)
+
+# observe that there is no NA values anymore
+table(gss_with_degree_and_xmarsex_without_NA_columns$xmarsex, gss_with_degree_and_xmarsex_without_NA_columns$degree)
+</code></pre>
+
+<pre><code>##                   
+##                    Lt High School High School Junior College Bachelor
+##   Always Wrong               5888       13588           1362     3191
+##   Almst Always Wrg            592        2224            242      920
+##   Sometimes Wrong             498        1281            117      427
+##   Not Wrong At All            208         398             52      103
+##                   
+##                    Graduate
+##   Always Wrong         1369
+##   Almst Always Wrg      563
+##   Sometimes Wrong       289
+##   Not Wrong At All       85
+</code></pre>
+
+<p>Now, we are ready to use the inference function.
+First, we need to load the inference function:</p>
+
+<pre><code class="r">load(url(&quot;http://s3.amazonaws.com/assets.datacamp.com/course/dasi/inference.Rdata&quot;))
+</code></pre>
+
+<p>Now we will execute the function, for chi-squared independent test for a dropped NA&#39;s dataset:</p>
+
+<pre><code class="r">inference(gss_with_degree_and_xmarsex_without_NA_columns$xmarsex, gss_with_degree_and_xmarsex_without_NA_columns$degree, 
+    est = &quot;proportion&quot;, type = &quot;ht&quot;, method = &quot;simulation&quot;, alternative = &quot;greater&quot;)
+</code></pre>
+
+<pre><code>## Warning: package &#39;BHH2&#39; was built under R version 3.0.3
+</code></pre>
+
+<pre><code>## Response variable: categorical, Explanatory variable: categorical
+## Chi-square test of independence
+## 
+## Summary statistics:
+##                   x
+## y                  Lt High School High School Junior College Bachelor
+##   Always Wrong               5888       13588           1362     3191
+##   Almst Always Wrg            592        2224            242      920
+##   Sometimes Wrong             498        1281            117      427
+##   Not Wrong At All            208         398             52      103
+##   Sum                        7186       17491           1773     4641
+##                   x
+## y                  Graduate   Sum
+##   Always Wrong         1369 25398
+##   Almst Always Wrg      563  4541
+##   Sometimes Wrong       289  2612
+##   Not Wrong At All       85   846
+##   Sum                  2306 33397
+</code></pre>
+
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAfgAAAH4CAMAAACR9g9NAAABqlBMVEX9/v0AAAAAAA0AABcAACgAADEAADkAAGUADVEAF0gAKDkAOTkAOY8AOZwAOigASbUAWLUAZrUNAAANDQ0NUbsXAAAXOpwXSbUXZtoge7Uge9ooAAAoF2YoIBcoKIEoKI8oOVcoSDkoSbUogf0oj9oxUTE5AAA5ADk5IGY5KAA5OQA5OTk5OY85SEg5SI85Zlc5ZoE5ZrU5e3s5e9o5j7U5j9o5nP1IAABIFwBIOY9ISWVRFwBRFzlRvP1XAABXOhdXOkhXtf1lAABlAGVlOTllOY9lZjllZldlZmVlZoFlZo9lZrVlgWVlj7Vlj9plnI9ltbVltdpltf1mFyhmOQBmjzlm2/17IACBKCiB/v2POQCPOTmPOUiPOVePOWWPZo+Pj7WPj9qPnGWP29qP2/2cOQCcOgCcOhecjzmc/tqc/v21SQC1WCC1ZgC1Zjm1ZmW1j2W1tWW124+1/rW1/v27UQ27jzm7/v3aZijaeyDajyjajznaj2XatVfatWXatbXa/rXa/tra/v379b79gSj9tWX9vFH924/9/oH9/pz9/rX9/rv9/tr9/v0Y8TVHAAAAjnRSTlP///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////8Am570egAAAAlwSFlzAAALEgAACxIB0t1+/AAADBJJREFUeJzt3Yt721Ydh/EdGAmwjhHubNxh4bLBSMHhXsAl49JRhjZuAVLGzHW4gWJgTIE1JqqHZ/3PSLLd1mHSOVZiV/p938/zZI9cJ7bn10c3y/J9KSTdd68fAO4NwosivCjCiyK8KMKLIrwowosivCh/+Dia/iTFT9Ip/vGol/933HWbgzsXp2a/8Rrq3UL+V///77FzW7N/LL9DlAsKP+5mdebZxt2NJ6OjJ9309ZBfdsXF0fZGL//xh1/uFpLoqDe6evQpl/1lce1j2YMZ7WR/m118nXNv+HXxz9mNfn03n8j+4tH5q6IwunrX/wpmlhjxLpM9+XE0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" alt="plot of chunk execute_inference"/> </p>
+
+<pre><code>## H_0: Response and explanatory variable are independent.
+## H_A: Response and explanatory variable are dependent.
+## 
+##  Pearson&#39;s Chi-squared test with simulated p-value (based on 2000
+##  replicates)
+## 
+## data:  y_table
+## X-squared = 764.7, df = NA, p-value = 0.0004998
+</code></pre>
+
+<p>We have a p-value pretty small, about 0.000498.</p>
 
 <h3>Conclusion:</h3>
 
-<p>Insert conclusion here&hellip;</p>
+<p>We can canclude with this study, based on the chi-squared independence test and the value of p-value;
+There is a relationship between the degrees of education and the opinion of having sexual relations with other than your marriage partner.
+The p-value is pretty small, what means that we can reject the null hypothesis in flavor of the alternative hypothesis.</p>
 
 </body>
 

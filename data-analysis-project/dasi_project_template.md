@@ -273,13 +273,185 @@ In the mosaic plot visualization, you can see that the distribution for the Alwa
 
 
 
-
-
 ### Inference:
 
-Insert inference section here...
+I want to check with my study if the degree of education influences in the opinion about having sexual relations with someone different than your marriage partner.
+For verify this, I will use the __chi-square independent test__. 
+
+The first thing we need to do is build a contingency table for very the relationship between the variables DEGREE and XMARSEX.
+
+
+```r
+addmargins(table(gss$xmarsex, gss$degree))
+```
+
+```
+##                   
+##                    Lt High School High School Junior College Bachelor
+##   Always Wrong               5888       13588           1362     3191
+##   Almst Always Wrg            592        2224            242      920
+##   Sometimes Wrong             498        1281            117      427
+##   Not Wrong At All            208         398             52      103
+##   Other                         0           0              0        0
+##   Sum                        7186       17491           1773     4641
+##                   
+##                    Graduate   Sum
+##   Always Wrong         1369 25398
+##   Almst Always Wrg      563  4541
+##   Sometimes Wrong       289  2612
+##   Not Wrong At All       85   846
+##   Other                   0     0
+##   Sum                  2306 33397
+```
+
+Hypotheses for this study are:
+
+__H0 (nothing going on)__: XMARSEX and DEGREE of education are __independent__. The opinion about having sexual relations with other than your spouse is not related with degree of education.
+__H1(something going on): XMARSEX and DEGREE of education are __dependent__. The opinion about having sexual relations with other than your spouse is related with degree of education.
+
+We need to check the conditions for the chi-squared test:
+
+1) __Independence:__ 
+* random sample/assignment ? Ok
+* if sample without replacement, n < 10% of population? Ok
+* each case only contributes to one cell in the table? Ok
+
+2) __Sample size:__ Each particular scenario (i.e cell) must have at least 5 expected cases? Ok
+
+
+The process of  execute a chi-square test of independence follows a set o steps that are:
+
+* calculate the expected values for each level and compare this with the observed value
+
+* calculate the X squared 
+* calculate the degrees of freedom
+* and use the pchisq function and calculate the p-value.
+
+We do not calculate this by hand and we will use the Inference function in R to execute the chi-squared test for us.
+
+First, take a look again on the relationship of XMARSEX and DEGREE:
+
+
+```r
+table(gss$xmarsex, gss$degree)
+```
+
+```
+##                   
+##                    Lt High School High School Junior College Bachelor
+##   Always Wrong               5888       13588           1362     3191
+##   Almst Always Wrg            592        2224            242      920
+##   Sometimes Wrong             498        1281            117      427
+##   Not Wrong At All            208         398             52      103
+##   Other                         0           0              0        0
+##                   
+##                    Graduate
+##   Always Wrong         1369
+##   Almst Always Wrg      563
+##   Sometimes Wrong       289
+##   Not Wrong At All       85
+##   Other                   0
+```
+
+
+Observe the row correspondent to the __Other__ opnion for XMARSEX. There is no value for any column, just zero. 
+To execute the chi-squared test correctly we need to remove all the 0 values for variables. 
+
+Let's drop the columns with 0 values:
+
+
+```r
+# just columns of interest, gss$degree and gss$xmarsex
+gss_with_degree_and_xmarsex <- gss[c(12, 94)]
+
+# remove rows with NAs in either column
+gss_with_degree_and_xmarsex_without_NA_columns <- gss_with_degree_and_xmarsex[!is.na(gss_with_degree_and_xmarsex[, 
+    1]) & !is.na(gss_with_degree_and_xmarsex[, 2]), ]
+
+# droplevels
+gss_with_degree_and_xmarsex_without_NA_columns <- droplevels(gss_with_degree_and_xmarsex_without_NA_columns)
+
+# observe that there is no NA values anymore
+table(gss_with_degree_and_xmarsex_without_NA_columns$xmarsex, gss_with_degree_and_xmarsex_without_NA_columns$degree)
+```
+
+```
+##                   
+##                    Lt High School High School Junior College Bachelor
+##   Always Wrong               5888       13588           1362     3191
+##   Almst Always Wrg            592        2224            242      920
+##   Sometimes Wrong             498        1281            117      427
+##   Not Wrong At All            208         398             52      103
+##                   
+##                    Graduate
+##   Always Wrong         1369
+##   Almst Always Wrg      563
+##   Sometimes Wrong       289
+##   Not Wrong At All       85
+```
+
+
+Now, we are ready to use the inference function.
+First, we need to load the inference function:
+
+
+```r
+load(url("http://s3.amazonaws.com/assets.datacamp.com/course/dasi/inference.Rdata"))
+```
+
+
+Now we will execute the function, for chi-squared independent test for a dropped NA's dataset:
+
+
+```r
+inference(gss_with_degree_and_xmarsex_without_NA_columns$xmarsex, gss_with_degree_and_xmarsex_without_NA_columns$degree, 
+    est = "proportion", type = "ht", method = "simulation", alternative = "greater")
+```
+
+```
+## Warning: package 'BHH2' was built under R version 3.0.3
+```
+
+```
+## Response variable: categorical, Explanatory variable: categorical
+## Chi-square test of independence
+## 
+## Summary statistics:
+##                   x
+## y                  Lt High School High School Junior College Bachelor
+##   Always Wrong               5888       13588           1362     3191
+##   Almst Always Wrg            592        2224            242      920
+##   Sometimes Wrong             498        1281            117      427
+##   Not Wrong At All            208         398             52      103
+##   Sum                        7186       17491           1773     4641
+##                   x
+## y                  Graduate   Sum
+##   Always Wrong         1369 25398
+##   Almst Always Wrg      563  4541
+##   Sometimes Wrong       289  2612
+##   Not Wrong At All       85   846
+##   Sum                  2306 33397
+```
+
+![plot of chunk execute_inference](figure/execute_inference.png) 
+
+```
+## H_0: Response and explanatory variable are independent.
+## H_A: Response and explanatory variable are dependent.
+## 
+## 	Pearson's Chi-squared test with simulated p-value (based on 2000
+## 	replicates)
+## 
+## data:  y_table
+## X-squared = 764.7, df = NA, p-value = 0.0004998
+```
+
+
+We have a p-value pretty small, about 0.000498.
 
 ### Conclusion:
 
-Insert conclusion here...
+We can canclude with this study, based on the chi-squared independence test and the value of p-value;
+There is a relationship between the degrees of education and the opinion of having sexual relations with other than your marriage partner.
+The p-value is pretty small, what means that we can reject the null hypothesis in flavor of the alternative hypothesis.
 
